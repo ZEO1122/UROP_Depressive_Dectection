@@ -1,0 +1,200 @@
+[
+  {
+    "review_id": "P01",
+    "id": "2404.14463",
+    "title": "DAIC-WOZ: On the Validity of Using the Therapist's prompts in Automatic Depression Detection from Clinical Interviews",
+    "source": "alphaxiv",
+    "retrieval_date": "2026-09-14",
+    "indexed_publication_date": "2024-04-22T09:07:50.000Z",
+    "url": "https://www.alphaxiv.org/abs/2404.14463",
+    "review_depth": "full_text_via_openresearch",
+    "retrieved_in": [
+      "initial_keyword.json"
+    ]
+  },
+  {
+    "review_id": "P02",
+    "id": "2603.24651",
+    "title": "When Consistency Becomes Bias: Interviewer Effects in Semi-Structured Clinical Interviews",
+    "source": "alphaxiv",
+    "retrieval_date": "2026-09-14",
+    "indexed_publication_date": "2026-03-25T17:55:00.000Z",
+    "url": "https://www.alphaxiv.org/abs/2603.24651",
+    "review_depth": "full_text_via_openresearch",
+    "retrieved_in": [
+      "initial_embedding.json",
+      "initial_keyword.json"
+    ]
+  },
+  {
+    "review_id": "P03",
+    "id": "2605.23977",
+    "title": "A Multi-Probe Audit of Clinical-Interview Depression Detection Benchmarks",
+    "source": "alphaxiv",
+    "retrieval_date": "2026-09-14",
+    "indexed_publication_date": "2026-05-13T17:32:41.000Z",
+    "url": "https://www.alphaxiv.org/abs/2605.23977",
+    "review_depth": "full_text_via_openresearch",
+    "retrieved_in": [
+      "initial_embedding.json"
+    ]
+  },
+  {
+    "review_id": "P04",
+    "id": "2607.03744",
+    "title": "Can Conversational Temporal Dynamics Improve Depression Detection in Dyads? A Preliminary Investigation in Multi-Modality Perspectives",
+    "source": "alphaxiv",
+    "retrieval_date": "2026-09-14",
+    "indexed_publication_date": "2026-07-04T07:33:22.000Z",
+    "url": "https://www.alphaxiv.org/abs/2607.03744",
+    "review_depth": "full_text_via_openresearch",
+    "retrieved_in": [
+      "initial_embedding.json",
+      "initial_keyword.json"
+    ]
+  },
+  {
+    "review_id": "P05",
+    "id": "10.1038/s41598-024-60278-1",
+    "title": "Improving speech depression detection using transfer learning with wav2vec 2.0 in low-resource environments",
+    "source": "openalex",
+    "retrieval_date": "2026-09-14",
+    "indexed_publication_date": "2024-04-25",
+    "url": "https://doi.org/10.1038/s41598-024-60278-1",
+    "review_depth": "openresearch_abstract_plus_publisher_full_text",
+    "retrieved_in": [
+      "followup_baseline.json"
+    ]
+  },
+  {
+    "review_id": "P06",
+    "id": "10.21437/interspeech.2019-2036",
+    "title": "A Hierarchical Attention Network-Based Approach for Depression Detection from Transcribed Clinical Interviews",
+    "source": "openalex",
+    "retrieval_date": "2026-09-14",
+    "indexed_publication_date": "2019-09-13",
+    "url": "https://doi.org/10.21437/interspeech.2019-2036",
+    "review_depth": "discovery_abstract_only",
+    "retrieved_in": [
+      "followup_baseline.json"
+    ]
+  },
+  {
+    "review_id": "P07",
+    "id": "10.21437/interspeech.2022-10798",
+    "title": "A Step Towards Preserving Speakers’ Identity While Detecting Depression Via Speaker Disentanglement",
+    "source": "openalex",
+    "retrieval_date": "2026-09-14",
+    "indexed_publication_date": "2022-09-16",
+    "url": "https://doi.org/10.21437/interspeech.2022-10798",
+    "review_depth": "discovery_abstract_only",
+    "retrieved_in": [
+      "followup_baseline.json"
+    ]
+  },
+  {
+    "review_id": "P08",
+    "id": "10.1145/3627673.3679797",
+    "title": "HiQuE: Hierarchical Question Embedding Network for Multimodal Depression Detection",
+    "source": "openalex",
+    "retrieval_date": "2026-09-14",
+    "indexed_publication_date": "2024-10-20",
+    "url": "https://doi.org/10.1145/3627673.3679797",
+    "review_depth": "discovery_abstract_only",
+    "retrieved_in": [
+      "followup_baseline.json"
+    ]
+  },
+  {
+    "review_id": "P09",
+    "id": "10.1038/s44184-024-00112-8",
+    "title": "Harnessing multimodal approaches for depression detection using large language models and facial expressions",
+    "source": "openalex",
+    "retrieval_date": "2026-09-14",
+    "indexed_publication_date": "2024-12-23",
+    "url": "https://doi.org/10.1038/s44184-024-00112-8",
+    "review_depth": "discovery_abstract_only",
+    "retrieved_in": [
+      "initial_openalex.json"
+    ]
+  },
+  {
+    "review_id": "P10",
+    "id": "10.1609/aaai.v36i11.21483",
+    "title": "D-vlog: Multimodal Vlog Dataset for Depression Detection",
+    "source": "openalex",
+    "retrieval_date": "2026-09-14",
+    "indexed_publication_date": "2022-06-28",
+    "url": "https://doi.org/10.1609/aaai.v36i11.21483",
+    "review_depth": "discovery_abstract_only",
+    "retrieved_in": [
+      "followup_baseline.json"
+    ]
+  },
+  {
+    "review_id": "P11",
+    "id": "2602.15578",
+    "title": "Clinically Inspired Symptom-Guided Depression Detection from Emotion-Aware Speech Representations",
+    "source": "alphaxiv",
+    "retrieval_date": "2026-09-14",
+    "indexed_publication_date": "2026-02-17T13:47:05.000Z",
+    "url": "https://www.alphaxiv.org/abs/2602.15578",
+    "review_depth": "discovery_abstract_only",
+    "retrieved_in": [
+      "initial_embedding.json"
+    ]
+  },
+  {
+    "review_id": "P12",
+    "id": "2608.13891",
+    "title": "DepressionAgent: Reading, Listening, Seeing, and Deliberating Multimodal Evidence for Depression Risk Assessment",
+    "source": "alphaxiv",
+    "retrieval_date": "2026-09-14",
+    "indexed_publication_date": "2026-08-14T02:44:31.000Z",
+    "url": "https://www.alphaxiv.org/abs/2608.13891",
+    "review_depth": "discovery_abstract_only",
+    "retrieved_in": [
+      "initial_embedding.json"
+    ]
+  },
+  {
+    "review_id": "P13",
+    "id": "2604.14354",
+    "title": "Who is Speaking or Who is Depressed? A Controlled Study of Speaker Leakage in Speech-Based Depression Detection",
+    "source": "alphaxiv",
+    "retrieval_date": "2026-09-14",
+    "indexed_publication_date": "2026-04-15T19:14:48.000Z",
+    "url": "https://www.alphaxiv.org/abs/2604.14354",
+    "review_depth": "discovery_abstract_only",
+    "retrieved_in": [
+      "initial_keyword.json"
+    ]
+  },
+  {
+    "review_id": "P14",
+    "id": "2609.05543",
+    "title": "Do Depressive Facial Patterns Transfer Across Cultures and Contexts? Evidence from a German RCT and E-DAIC",
+    "source": "alphaxiv",
+    "retrieval_date": "2026-09-14",
+    "indexed_publication_date": "2026-09-02T13:26:57.000Z",
+    "url": "https://www.alphaxiv.org/abs/2609.05543",
+    "review_depth": "discovery_abstract_only",
+    "retrieved_in": [
+      "initial_embedding.json",
+      "initial_keyword.json"
+    ]
+  },
+  {
+    "review_id": "P15",
+    "id": "10.1109/tnsre.2022.3224135",
+    "title": "TAMFN: Time-Aware Attention Multimodal Fusion Network for Depression Detection",
+    "source": "openalex",
+    "retrieval_date": "2026-09-14",
+    "indexed_publication_date": "2022-11-24",
+    "url": "https://doi.org/10.1109/tnsre.2022.3224135",
+    "review_depth": "discovery_abstract_only",
+    "retrieved_in": [
+      "initial_openalex.json"
+    ]
+  }
+]
