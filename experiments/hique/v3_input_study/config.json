@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "purpose": "descriptive_registry_not_runner_configuration",
+  "id": "hique_input_study_v3",
+  "status": "current_evaluated_reference",
+  "cohort": {
+    "train": 107,
+    "dev": 32,
+    "test": 45
+  },
+  "conditions": [
+    "E0",
+    "E1",
+    "E2",
+    "E3",
+    "E4"
+  ],
+  "seeds": [
+    42,
+    13,
+    23,
+    37,
+    79
+  ],
+  "epochs": 100,
+  "model": "F_AVT",
+  "batch_size": 8,
+  "learning_rate": 0.0002,
+  "dropout": 0.5,
+  "checkpoint_selection": "minimum_dev_loss",
+  "private_artifacts": "Data/hique_input_study_v3",
+  "results": [
+    "dev_results.md",
+    "test_results.md"
+  ],
+  "limitations": [
+    "Prior test exposure",
+    "Not an exact paper reproduction",
+    "Question mapping not independent human gold"
+  ]
+}

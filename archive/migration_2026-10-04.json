@@ -1,0 +1,446 @@
+{
+  "date": "2026-10-04",
+  "snapshot": "archive/snapshots/pre-reorg-2026-10-04",
+  "source_files": [
+    {
+      "old": "experiments/__init__.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/__init__.py",
+      "sha256": "79f5567fa7dff56d6de5dd643c3d1e46249f23f98996557a3112eda6115054b7"
+    },
+    {
+      "old": "experiments/assemble_ai_annotations.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/assemble_ai_annotations.py",
+      "sha256": "fd5a7075861ff44e6c65141c9084374327ffc26d32fac0e5aeddcce6a12be5de"
+    },
+    {
+      "old": "experiments/features.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/features.py",
+      "sha256": "ab1fae3ea4ec0c23ece76d6a5fae3fdfdba80497034642cdec2d959341631647"
+    },
+    {
+      "old": "experiments/hique2_asr.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/hique2_asr.py",
+      "sha256": "9c6776075f6cf09c321e6acf8e9abd602aef9f0f8d2d7d2ed70034d57dc5dca2"
+    },
+    {
+      "old": "experiments/hique2_audit.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/hique2_audit.py",
+      "sha256": "e8ce945686a8067cf8457eab0b7a2160752a3efc964b433cc6410330e24be7ee"
+    },
+    {
+      "old": "experiments/hique2_av.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/hique2_av.py",
+      "sha256": "5a030de6ec949a8d51e05b9ed5969ae99549e9ff0faa66a688e18fdd68cd6f85"
+    },
+    {
+      "old": "experiments/hique2_data.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/hique2_data.py",
+      "sha256": "e289541dab33152b792d01a2e83129f3c2d1fb81f8e2271baaba2e06529851ee"
+    },
+    {
+      "old": "experiments/hique2_network.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/hique2_network.py",
+      "sha256": "f9dd1e00ac08cc517d55bb83acccafb79743843486bc47356850035b8f4e99be"
+    },
+    {
+      "old": "experiments/hique2_report.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/hique2_report.py",
+      "sha256": "497f6a10ed9c94be1c0889e57061fabe834a9989c78ec029555706b5fd5b7cb8"
+    },
+    {
+      "old": "experiments/hique2_train.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/hique2_train.py",
+      "sha256": "f4b25f7c4f7fb1f799c7d239acca05242ef4ded479a393e74feb3e4546b1d0c6"
+    },
+    {
+      "old": "experiments/hique3_features.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/hique3_features.py",
+      "sha256": "28fca7e3e0706e70f408420866959025c81645015775da19a1172902df74454d"
+    },
+    {
+      "old": "experiments/hique3_prepare.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/hique3_prepare.py",
+      "sha256": "c76651700e94b35daaf12e4b7d956137a42e13a3efd8ed49f5bf2a31caab4a59"
+    },
+    {
+      "old": "experiments/hique3_report.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/hique3_report.py",
+      "sha256": "134efed4cd8cd8d84d044a5f1b6478921f73efba75cdc70f3f37cae255a450a5"
+    },
+    {
+      "old": "experiments/hique3_test.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/hique3_test.py",
+      "sha256": "ff550f48bbd27002e1fb25df8bbec079aa66f114453d7aa93b9698e74aa07df1"
+    },
+    {
+      "old": "experiments/hique3_test_features.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/hique3_test_features.py",
+      "sha256": "9a47f99011f668ea620602b6710be300c1bc54aa1eb761d3c9d9196bf7b6d441"
+    },
+    {
+      "old": "experiments/hique3_test_report.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/hique3_test_report.py",
+      "sha256": "7778b5827e64bca6b2f2242be7cfb0529dcd7fa3f6f5aecb3e2e0889a322ede9"
+    },
+    {
+      "old": "experiments/hique3_train.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/hique3_train.py",
+      "sha256": "3a45477a28c8234d510d048922191fa8da7df034b3bad674491cfcb1aa2c5e87"
+    },
+    {
+      "old": "experiments/hique_av.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/hique_av.py",
+      "sha256": "b27c7b05cf36aefb5fae8d6e90cb3fcf67cb3db62bc64b3ff33fbf992ad3996e"
+    },
+    {
+      "old": "experiments/hique_data.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/hique_data.py",
+      "sha256": "57dd9e7f9640e4eb1048d45b6dcd3656648dd8f8bd5b6248efe9a677bdf4d620"
+    },
+    {
+      "old": "experiments/hique_diagnose_inputs.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/hique_diagnose_inputs.py",
+      "sha256": "d49ca3b9550e67be73eeb5fcb432c4e43eea014cd152a7fabdc38b765da66b76"
+    },
+    {
+      "old": "experiments/hique_network.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/hique_network.py",
+      "sha256": "5a3d0bdf847cc214bab9ca82b49bc7ab503616620494ff7c6d27cba4425d0880"
+    },
+    {
+      "old": "experiments/hique_report.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/hique_report.py",
+      "sha256": "43fdd7899a9d15b7648189f0a62f7c014f308e08373a96e80aa88981f0129cae"
+    },
+    {
+      "old": "experiments/hique_train.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/hique_train.py",
+      "sha256": "428b549510174663bdced1ef3e223d0abb0b65f9ff880cface505ee3d2c95a61"
+    },
+    {
+      "old": "experiments/prepare.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/prepare.py",
+      "sha256": "a443d5d7895346e939c4d1d4a575b39a573b3a0a07f7b4aad688c6963ce946d4"
+    },
+    {
+      "old": "experiments/report.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/report.py",
+      "sha256": "2093414ddd00812c0a810e8f8b8840934348efc122d626c7fe02102c4e5f7735"
+    },
+    {
+      "old": "experiments/run_a.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/run_a.py",
+      "sha256": "c0f08fb5ec4f129e4c0861ce00365884a5f794f7fd5787587c18ecf3b6a8a425"
+    },
+    {
+      "old": "experiments/run_a_annotated.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/run_a_annotated.py",
+      "sha256": "98207c206fa8147dca08dbe8528bb61f801cb2c055037db7d4abb4af6e750087"
+    },
+    {
+      "old": "experiments/run_b.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/run_b.py",
+      "sha256": "2252e8f0215b4ddd1535928202c262d5f09d2836dd2332c0ac8c1e7880fd2581"
+    },
+    {
+      "old": "experiments/run_c.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/run_c.py",
+      "sha256": "4077656880c6c05701d79c0dbaa4270bd88108ca18f7588f20a77b3045560c41"
+    },
+    {
+      "old": "experiments/run_suite.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/experiments/run_suite.py",
+      "sha256": "f9eeca839a990ffd6f83d15169524f56283789e40b40abfc06fbdef6b3787548"
+    },
+    {
+      "old": "tests/test_a_annotated.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/tests/test_a_annotated.py",
+      "sha256": "49542cc22f15c412f5df1c6b4b0fadbc06082918364f72817a6b9d347330c9d1"
+    },
+    {
+      "old": "tests/test_ai_annotations.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/tests/test_ai_annotations.py",
+      "sha256": "c72ddb50b2b5ab1a22c319294cf21cbcdf4f6f6731d32f2f2c1f25461a50f88e"
+    },
+    {
+      "old": "tests/test_experiment_a.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/tests/test_experiment_a.py",
+      "sha256": "fe0fd2dc1775dfa6ef9ff2143cc5bbbd209f13031f4f67bc12dc80bf58d4c662"
+    },
+    {
+      "old": "tests/test_experiment_b.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/tests/test_experiment_b.py",
+      "sha256": "f9469a3654c7908c296566b940b9705c8600e23c6dfbfd30a9ca82a5177db5cc"
+    },
+    {
+      "old": "tests/test_experiment_c.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/tests/test_experiment_c.py",
+      "sha256": "bb38f93ec42da2a98099252a1dfc60e1339faade5758f4ccb6eb08394a0670dc"
+    },
+    {
+      "old": "tests/test_hique2_asr.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/tests/test_hique2_asr.py",
+      "sha256": "7557fe261015aed8dc9f1d968ad8f38f73fcfdf165b3917744674e47fccd133d"
+    },
+    {
+      "old": "tests/test_hique2_av.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/tests/test_hique2_av.py",
+      "sha256": "dbd0b3311f2656cad3e595f2e757fa62cd1e489fc9956768c979587f1b0147f2"
+    },
+    {
+      "old": "tests/test_hique2_data.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/tests/test_hique2_data.py",
+      "sha256": "c9c6d2403706cf4e405c91996c29e587d4a46d7bc6ea642f7c763a8f340a0e69"
+    },
+    {
+      "old": "tests/test_hique2_network.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/tests/test_hique2_network.py",
+      "sha256": "6bfc6ff3e483f065b5807ff262d7ddcc38481473252420739b4ae26198e532bd"
+    },
+    {
+      "old": "tests/test_hique2_train.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/tests/test_hique2_train.py",
+      "sha256": "a2c323cfe71f221be49d1567b288862a91f5faa2926d778b9aa0bdb19c629ec3"
+    },
+    {
+      "old": "tests/test_hique3_features.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/tests/test_hique3_features.py",
+      "sha256": "300526c3e2f2a295d7050739468b047036048c593481080816041e37008c874d"
+    },
+    {
+      "old": "tests/test_hique3_prepare.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/tests/test_hique3_prepare.py",
+      "sha256": "999532b31c903c1950f324b49a72f1a5fe014eddfd4f78ae75685ffe2ec5928a"
+    },
+    {
+      "old": "tests/test_hique3_test.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/tests/test_hique3_test.py",
+      "sha256": "e32eff46e92ea49b3aa529b13d2cb112cbc42fa2083b34b1e728b87144eca969"
+    },
+    {
+      "old": "tests/test_hique3_test_features.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/tests/test_hique3_test_features.py",
+      "sha256": "0657c04bcb1d0e57756ef4bea78fdf2487e7d50dc51c37915f2afee000778bb0"
+    },
+    {
+      "old": "tests/test_hique3_train.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/tests/test_hique3_train.py",
+      "sha256": "8bf28f4a1d18a7684535c49458086eadadea1b903de8a9741f84e0ddd2378b0e"
+    },
+    {
+      "old": "tests/test_hique_av.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/tests/test_hique_av.py",
+      "sha256": "96971310287e5c4b264ce364af09fdfcf10929c304b33f01b0041327de57e545"
+    },
+    {
+      "old": "tests/test_hique_data.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/tests/test_hique_data.py",
+      "sha256": "ae75b06acb27025d0c13a9a93021031770ff86730f489f42b095c4865fb80af6"
+    },
+    {
+      "old": "tests/test_hique_network.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/tests/test_hique_network.py",
+      "sha256": "04f165aaad96bb3e22f29fc45eb789945c9d0de6f64e9bfccbe10760ff49fce8"
+    },
+    {
+      "old": "tests/test_hique_train.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/tests/test_hique_train.py",
+      "sha256": "5a60ff42e98d0357eff149287421328b9bb1a8fa35910f21c09a4ab5ef2aa6d9"
+    },
+    {
+      "old": "tests/test_prepare.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/tests/test_prepare.py",
+      "sha256": "b946553f522f143bdd99a89819803be6c063af7f0b9f4cf7691581b444bd0b4f"
+    },
+    {
+      "old": "tests/test_report.py",
+      "new": "archive/snapshots/pre-reorg-2026-10-04/tests/test_report.py",
+      "sha256": "7762c728abb565c2fcac9f894650b0ebab41c369a77a673a44a3215dc11802bc"
+    }
+  ],
+  "documents": {
+    "schema_version": 1,
+    "date": "2026-10-04",
+    "moves": [
+      {
+        "old": "Week1/README.md",
+        "new": "docs/weekly/week01.md",
+        "original_sha256": "37f137075b7f57a090d76f4e28b221031991eef655081107a40704a6615c5395",
+        "reorganized_sha256": "fd848c7f2969d81ae2d4e892daabe630e0760db352c3930ceba179c4bb30fdc5"
+      },
+      {
+        "old": "Week2/README.md",
+        "new": "docs/weekly/week02.md",
+        "original_sha256": "bebd40d4458c32e7e344500dade4b76b5566e7201d67ea6731621a9a03bcb6de",
+        "reorganized_sha256": "39938645c49c7f3ee0f9a28d17ee7c006bf0fad0021ac5491452040de9fcce60"
+      },
+      {
+        "old": "Week2/research/week2_literature/assessment_reframing_ko.md",
+        "new": "docs/research_direction.md",
+        "original_sha256": "8dc621353c74287e544861c7d1a9bcb03ba08dfc01e4f6d3bd30533ef247c6c8",
+        "reorganized_sha256": "8dc621353c74287e544861c7d1a9bcb03ba08dfc01e4f6d3bd30533ef247c6c8"
+      },
+      {
+        "old": "Week2/research/week2_literature/README.md",
+        "new": "docs/literature/README.md",
+        "original_sha256": "9a21cf5ee691cf71b93a36b043480027379fb78957e0ba12222d75b861137a5f",
+        "reorganized_sha256": "715a35d301aa35733b387d5e29d8844f02dfdcec6df8880fdfeb505e7fb5f337"
+      },
+      {
+        "old": "Week2/research/week2_literature/literature_review_ko.md",
+        "new": "docs/literature/literature_review_ko.md",
+        "original_sha256": "e704485348b41dbd7f99553f2570c941410ef43a11857121b15a2e38a7c7657b",
+        "reorganized_sha256": "3448b011a5f88701314d7365fd35b97ae73faba9f10597cd4da54ee2f1f83856"
+      },
+      {
+        "old": "Week2/research/week2_literature/search_log.md",
+        "new": "docs/literature/search_log.md",
+        "original_sha256": "99928b67a7f8cb3f883c1a48875e7f1d5a4168fb40171acf9e3c6b02ef5de80b",
+        "reorganized_sha256": "99928b67a7f8cb3f883c1a48875e7f1d5a4168fb40171acf9e3c6b02ef5de80b"
+      },
+      {
+        "old": "Week2/research/week2_literature/selected_papers.json",
+        "new": "docs/literature/selected_papers.json",
+        "original_sha256": "3abd2c0d3a675dab53d7bfa71ecca99752136a15c33f010601abbb8db9a77701",
+        "reorganized_sha256": "3abd2c0d3a675dab53d7bfa71ecca99752136a15c33f010601abbb8db9a77701"
+      },
+      {
+        "old": "Week2/research/experiment_prior_art_2026-09-27_ko.md",
+        "new": "docs/literature/evidence_experiment_prior_art.md",
+        "original_sha256": "392286932024ebab58a124d4168deb42c011536bd1d3b5bb0d5474b094b7acf1",
+        "reorganized_sha256": "392286932024ebab58a124d4168deb42c011536bd1d3b5bb0d5474b094b7acf1"
+      },
+      {
+        "old": "Week2/research/hique_reproduction_recommendation_ko.md",
+        "new": "docs/literature/hique_selection.md",
+        "original_sha256": "d0948035daca7324a94a2fefe8f690735495f8dbde128deaebda118fcdc06805",
+        "reorganized_sha256": "d0948035daca7324a94a2fefe8f690735495f8dbde128deaebda118fcdc06805"
+      },
+      {
+        "old": "Week2/research/ai_annotated_a_results_ko.md",
+        "new": "experiments/ai_annotation_pilot/results.md",
+        "original_sha256": "be0d7ee25e00308e7ce2276220787cfc6a1c76a2b771d0bf7fdacb68dc66a70f",
+        "reorganized_sha256": "d648dc238d84f57a4291454366c456cd05526ddf3f73f2a467f0c31b2f46273d"
+      },
+      {
+        "old": "Week2/research/ai_annotation_draft_notes_ko.md",
+        "new": "experiments/ai_annotation_pilot/annotation_notes.md",
+        "original_sha256": "22e88a2db8a27af9a2f3c5f3e87b7b61114ece7c41d2c79d13fe213251bd71be",
+        "reorganized_sha256": "d495e55311e95e7b081e1904b1e0997ff4ffbcdf9716141135554fc88312d230"
+      },
+      {
+        "old": "Week2/research/three_experiments_pilot_results_ko.md",
+        "new": "experiments/evidence_pilot/results.md",
+        "original_sha256": "39f5a9e91857a8eeca481ebd768d4628f313382b492c6d8410ec78a922f48ffb",
+        "reorganized_sha256": "39f5a9e91857a8eeca481ebd768d4628f313382b492c6d8410ec78a922f48ffb"
+      },
+      {
+        "old": "Week2/research/hique_reproduction_results_ko.md",
+        "new": "experiments/hique/v1/results.md",
+        "original_sha256": "0deeb05ec6c1a85a0fce890a3f7c4568c34239a1297fc040c8dbf30633284c7f",
+        "reorganized_sha256": "200558ba293715a22c2455627e479625b5b65984c681c9e2930aaceb38aa5907"
+      },
+      {
+        "old": "Week2/research/hique_excluding440_results_ko.md",
+        "new": "experiments/hique/v2/results.md",
+        "original_sha256": "5e4f3b1a14706ae0a9239d29ec403452ba5eade87d4ac97d0805081e175a0377",
+        "reorganized_sha256": "2d854260496406202fc3d51ba2cd92397be306a72c00562bcaaffdfe0300b284"
+      },
+      {
+        "old": "Week2/research/hique_input_study_v3_results_ko.md",
+        "new": "experiments/hique/v3_input_study/dev_results.md",
+        "original_sha256": "5f2d11f67aca78d6258f3417c96b44f301f1e4958a2ee462947d811b3ff73ea1",
+        "reorganized_sha256": "8eede5acbc30caeac98fc7be6e6fad9eb1e09e2ca2cf7ea7ce591cbb54ef03db"
+      },
+      {
+        "old": "Week2/research/hique_input_study_v3_test_results_ko.md",
+        "new": "experiments/hique/v3_input_study/test_results.md",
+        "original_sha256": "2f973b0677abcdad305c9ae9812cccbc990d9b1f783c893475778269f96d404f",
+        "reorganized_sha256": "2f973b0677abcdad305c9ae9812cccbc990d9b1f783c893475778269f96d404f"
+      },
+      {
+        "old": "Week2/research/hique_gap_diagnosis_2026-10-03_ko.md",
+        "new": "docs/hique_diagnosis.md",
+        "original_sha256": "a801ba5e6ce29f7d884744c18c15fbe684a84c6fc908dd6db96893c5173a94ae",
+        "reorganized_sha256": "ed13137b0a63678ca90d533b38a6a297634a3bd724e31e529b5daf3c64dd0379"
+      },
+      {
+        "old": "Week2/research/daic_download_audit_2026-09-27.md",
+        "new": "docs/data/download_audit_2026-09-27.md",
+        "original_sha256": "a8811470f4f8e52e8b718b37ea0169472ba26fd62eab2d2ea5a8ed918da469ae",
+        "reorganized_sha256": "9ed43e999656cb288da6260086d14487c16395660d3634b1827435f08286a0b1"
+      },
+      {
+        "old": "Week2/research/daic_download_recheck_2026-09-27.md",
+        "new": "docs/data/download_recheck_2026-09-27.md",
+        "original_sha256": "470d86b7ba38df3cc933cdf8abac86b5af1f3fe88c3232b3396532d32a4741ec",
+        "reorganized_sha256": "121ec5b11afb654fbb7c2d88108702ac0adc16d4efd98840e946dad8a9e9c7e7"
+      },
+      {
+        "old": "Week2/research/no_api_evidence_experiment_ko.md",
+        "new": "archive/plans/no_api_evidence_experiment_ko.md",
+        "original_sha256": "f20b6fb902f5f17b199ab07d3846aaf9b2e40ca6c3380c4607ae64bcec3cbd00",
+        "reorganized_sha256": "f9d37efb24ffa4e0a370bd6fb1d8760acf5e84fb0d59d380ba59e8fc1f98d7d9"
+      },
+      {
+        "old": "Week2/research/three_experiment_candidates_2026-09-27_ko.md",
+        "new": "archive/plans/three_experiment_candidates_2026-09-27_ko.md",
+        "original_sha256": "2ed44c4d43d1d08b3a38950ee996ab6b0f076afb17d64ec193da6218914222ca",
+        "reorganized_sha256": "bb04db8dc78d8cd34e60dd52221d61ac203b60a3a76d140b6e77e7de6ce07994"
+      },
+      {
+        "old": "Week2/research/hique_faithful_reproduction_plan_ko.md",
+        "new": "archive/plans/hique_faithful_reproduction_plan_ko.md",
+        "original_sha256": "f9289feda09620061f2baf75e34dcb6fb9169a6906fb7faa263132f8ec6f61f4",
+        "reorganized_sha256": "d6c185dc1f8927e933ca888618a109388a5d8821ccd813ceabc4be00911ab8e8"
+      },
+      {
+        "old": "Week2/research/hique_experiment_design_excluding440_ko.md",
+        "new": "archive/plans/hique_experiment_design_excluding440_ko.md",
+        "original_sha256": "0384e7ac80fb77efe453c8aafdab2c83917ee841a59ce5bfa23ea0c3b2f52ba3",
+        "reorganized_sha256": "e58b4ce4b65654866514ba253f1ab872771d97aed641216272ea2e74d39ea8cd"
+      },
+      {
+        "old": "Week2/research/hique_strengthening_plan_2026-10-03_ko.md",
+        "new": "archive/plans/hique_strengthening_plan_2026-10-03_ko.md",
+        "original_sha256": "443f6261c49430185ee7bc3613d748d4602ba1e799ba0e8c7a162afe17e9c764",
+        "reorganized_sha256": "7a619fbba2d314e065f39a998d177a27f4aebe9c116f5e7b79edec28456bee42"
+      },
+      {
+        "old": "experiments/HIQUE_REPRODUCTION.md",
+        "new": "experiments/hique/v1/README.md",
+        "original_sha256": "62842311df334ad21fd935663ee4a6ca100cb6eb7eecc65f85ebe9271aa546fd",
+        "reorganized_sha256": "d7c338fe435c47e787d07688d23b9af6e3e000065e4137062ce953d82f4a1275"
+      },
+      {
+        "old": "experiments/HIQUE_EXCLUDING440.md",
+        "new": "experiments/hique/v2/README.md",
+        "original_sha256": "1d87f76daf7be5da0097bc21012d43cf63ab08d5152141bfafc9191b43c02618",
+        "reorganized_sha256": "3bd9a73442e1ed49b9f0bbf077839d5944bc41ba53e06e380492dfea2204dfec"
+      },
+      {
+        "old": "experiments/HIQUE_INPUT_STUDY_V3.md",
+        "new": "experiments/hique/v3_input_study/README.md",
+        "original_sha256": "997d508eededdc30814b26b3d9664c6fe767501ec5d9b28084449807368723ac",
+        "reorganized_sha256": "d1de38b67cc5939b350897f66e9f6685b8e82121eebf02c53e51060e84f44765"
+      },
+      {
+        "old": "experiments/README.md",
+        "new": "experiments/evidence_pilot/README.md",
+        "original_sha256": "88b4737638f82a5b5cc3176a673f8ab7ecd2aa9c5de6860d7a0c7a301b35b0cf",
+        "reorganized_sha256": "a4f9a444d42398be4a2c0bbbd44a0c0a8f2aaed7cf232dde5222fa9d894fbc62"
+      }
+    ]
+  },
+  "preserved_local_roots": [
+    "Data",
+    ".tmp",
+    "output",
+    ".aws",
+    ".agents",
+    ".codex",
+    ".omx"
+  ],
+  "scratch_archive": "Data/local_archive/tmp_pre_reorg_2026-10-04",
+  "note": "Original SHA256 remains recorded; current editable docs have separate reorganized hashes. Old-source execution uses urop legacy, not modified frozen manifests."
+}

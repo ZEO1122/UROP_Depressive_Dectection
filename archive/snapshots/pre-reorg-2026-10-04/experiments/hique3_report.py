@@ -1,0 +1,94 @@
+"""Report the paired train/dev input study; never claim unseen-test performance."""
+from __future__ import annotations
+
+import csv
+import json
+from pathlib import Path
+
+from .hique_train import digest
+
+
+def main():
+    base=Path('Data/hique_input_study_v3')
+    runs=base/'runs'
+    completion=json.loads((runs/'extend_complete.json').read_text())
+    assert completion['results_sha256']==digest(runs/'extend_results.json')
+    results=json.loads((runs/'extend_results.json').read_text())
+    config=json.loads((runs/'frozen_config.json').read_text())
+    tokens=json.loads((base/'features/text_audit.json').read_text())
+    prep=json.loads((base/'preparation_summary.json').read_text())
+    names={'E0':'ASR 기준선 (토크나이저 수정)', 'E1':'제공 전사·마지막 답변',
+           'E2':'제공 전사·첫 답변', 'E3':'제공 전사·전체 답변·512토큰',
+           'E4':'제공 전사·전체 답변·블록 가중 평균'}
+    rows=[]
+    for condition in config['conditions']:
+        row={'condition':condition,'description':names[condition]}
+        for split in ['train','dev']:
+            for key in ['macro_f1','positive_f1','sensitivity','specificity','auroc']:
+                summary=results['conditions'][condition]['summary'][split][key]
+                row[f'{split}_{key}_mean']=summary['mean']
+                row[f'{split}_{key}_sd']=summary['std']
+        rows.append(row)
+    with (base/'results.csv').open('w',newline='') as f:
+        writer=csv.DictWriter(f,fieldnames=list(rows[0]))
+        writer.writeheader();writer.writerows(rows)
+    lines=['# HiQuE V3 입력 보강 비교 실험 결과', '',
+           '**학습 107명·검증 32명을 대상으로 한 입력 보강 진단 결과다. 테스트 성능 평가나 원 논문의 0.79 재현 결과가 아니다.**', '',
+           '## 실행 범위', '',
+           '- E0–E4 다섯 조건을 먼저 3개 시드(42/13/23)로 실행한 뒤, 기술적 검증 통과에 따라 모든 조건에 37/79를 추가했다. 총 25회이며, 각 실행은 100 epochs다.',
+           '- 동일 참가자·F_AVT 네트워크·초기화 시드·증강 인덱스를 사용했다. 배치 크기 8, Adam 학습률 0.0002, dropout 0.5, 표준화하지 않은 특징을 사용했다. 검증 손실이 가장 낮은 체크포인트를 선택하고, softmax 확률의 최댓값으로 분류했다. 동률은 클래스 0으로 처리했다.',
+           '- 공식 학습 집합 107명과 검증 집합에서 440/451/458을 제외한 32명을 사용했다. 새로운 테스트 전사·라벨·예측은 실험에 사용하지 않았다.',
+           '- E0는 기존 특징 캐시에서 학습·검증 참가자의 음성·영상 특징을 선택해 재사용했다. 기존 테스트 산출물은 무변경 확인을 위한 파일 해시만 비교했으며 결과를 새로 계산하지 않았다.',
+           '- 주 비교는 E1−E0의 전체 입력 경로 변경 효과다. 화자·시간·텍스트·질문 매핑이 함께 달라지므로 화자 구분만의 효과가 아니다.', '',
+           '## 학습 전에 발견하고 수정한 토크나이저 오류', '',
+           '설치된 Transformers 5.9에서 명시적 RobertaTokenizerFast 로딩은 BPE 병합 규칙이 0개이고 사전 토큰 분리기가 없는 상태로 구성돼 글자 단위 토큰화가 발생했다. 기존 V1/V2 텍스트 특징도 이 경로를 사용했다. 차원·유한값 검사만으로는 이 오류를 찾지 못했다.', '',
+           'AutoTokenizer가 읽은 50,000개의 BPE 병합 규칙과 ByteLevel 구성이 공식 tokenizer.json과 일치하는지 독립적으로 검사했다. 알려진 문장뿐 아니라 실제 고유 텍스트 8,198개 전체의 토큰 ID를 대조했다. E0를 포함한 모든 조건의 텍스트 특징(T)를 같은 올바른 토크나이저로 다시 계산했으며, 잘못된 중간 특징은 별도 보관하고 학습에 사용하지 않았다.', '',
+           '따라서 E0도 이전의 잘못된 텍스트 특징을 그대로 재사용한 조건이 아니다. E0의 ASR 구간·질문 매핑·음성·영상 특징은 유지했지만 텍스트 특징은 수정했다. 이번 실험만으로 토크나이저 수정의 F1 기여량을 단독 추정할 수 없고, 이전 테스트 점수와 이번 검증 점수를 직접 비교하지 않는다.', '',
+           '## 검증된 입력 경로', '',
+           '- 제공 전사의 speaker/start/stop을 사용한다. 확인한 맞장구는 현재 답변을 이어가고, 미확정 새 질문은 새 사건으로 분리해 이전 질문에 답변이 섞이지 않도록 했다.',
+           '- 질문표는 공개된 85개 정규형과 학습 집합에서만 검토한 별칭으로 고정했다. 독립 AI 검토를 거쳤지만 사람이 독립적으로 확정한 정답 주석은 아니다. 가까운 의미라는 이유만으로 모든 문장을 85개 중 하나에 강제 배정하지 않았다.',
+           f"- 원본 행 추적 결과: {prep['source_row_classifications']}. 시간 검사: {prep['source_time_status']}.",
+           '- 중복 없는 학습 집합 사건 200개 검토 패킷을 생성했다(일반 80개 / 반복 60개 / 연속 후속 40개 / 맞장구·unknown 20개). PHQ 라벨과 예측을 포함하지 않았다.',
+           '- E1은 마지막, E2는 첫 응답의 A/V/T를 함께 선택했다. E3/E4는 매핑된 같은 질문의 모든 답변을 시간순으로 모은다. Unknown 답변은 원문 사건 표에 남지만 85슬롯 모델에는 들어가지 않는다.',
+           '- E3/E4의 음성·영상·마스크는 완전히 동일하다. E4는 E3과 동일한 연결 텍스트를 내용 토큰이 최대 510개인 서로 겹치지 않는 블록으로 나누고, 고정된 RoBERTa의 CLS 표현을 각 블록의 내용 토큰 수로 가중 평균한다. 짧은 슬롯은 E3 표현을 그대로 사용한다.', '',
+           '## 검증 집합 성능', '',
+           '평균 ± SD는 5개 시드의 평균과 표준편차(ddof=0)다. 검증 집합은 체크포인트 선택에도 사용했으므로 아래 수치는 탐색 결과로 해석해야 한다.', '',
+           '| 조건 | 학습 Macro-F1 평균 | 검증 Macro-F1 평균 ± SD | 검증 양성 F1 | 검증 AUROC |',
+           '|---|---:|---:|---:|---:|']
+    for r in rows:
+        lines.append(f"| {r['condition']} {r['description']} | {r['train_macro_f1_mean']:.4f} | {r['dev_macro_f1_mean']:.4f} ± {r['dev_macro_f1_sd']:.4f} | {r['dev_positive_f1_mean']:.4f} | {r['dev_auroc_mean']:.4f} |")
+    lines += ['', '## 사전 지정 비교', '',
+              '| 비교 | 시드별 검증 Macro-F1 차이의 평균 | 탐색적 95% 구간 |', '|---|---:|---:|']
+    for key,d in results['comparisons'].items():
+        lines.append(f"| {key.replace('_minus_',' − ')} | {d['delta_macro_f1']:+.4f} | [{d['ci95'][0]:+.4f}, {d['ci95'][1]:+.4f}] |")
+    lines += ['', '동일 참가자를 모든 시드·비교 조건에서 함께 재표집한 2,000회 부트스트랩이다. 같은 검증 집합으로 체크포인트를 선택한 뒤 계산했으므로 선택 편향을 제거한 확증 신뢰구간이 아니다. 네 비교 중 유리한 결과만 선택하지 않았다.', '',
+              '## 정보 보존량', '',
+              '아래는 학습·검증 집합에서 모델 입력으로 매핑된 답변을 올바른 BPE로 토큰화한 결과다. Unknown을 포함한 인터뷰 전체 보존량은 아니다.', '',
+              '| 조건 | 입력 슬롯 | 제한 전 내용 토큰 | 실제 반영 내용 토큰 | 토큰 보존율 |',
+              '|---|---:|---:|---:|---:|']
+    for c in config['conditions']:
+        t=tokens[c];fraction=t['content_tokens_retained']/t['content_tokens_before']
+        lines.append(f"| {c} | {t['slots']} | {t['content_tokens_before']:,} | {t['content_tokens_retained']:,} | {fraction:.2%} |")
+    lines += ['', f"정상 토큰화에서 E3의 길이 초과 슬롯은 {tokens['E3']['long_slots']}개뿐이었다. 이외 {tokens['E3']['full_coverage_slots']}개는 E3/E4의 텍스트 특징이 비트 단위로 동일하다. 따라서 블록 가중 평균의 효과를 추정할 실제 개입 대상이 매우 적다는 점을 함께 해석해야 한다.", '',
+              '## 대조군과 한계', '']
+    for c,control in results['controls'].items():
+        lines.append(f"- {c}: 질문 등장 여부만 사용한 로지스틱 회귀의 Macro-F1 {control['question_presence']['macro_f1']:.4f}, 학습 집합의 다수 클래스로만 예측한 대조군 {control['majority']['macro_f1']:.4f}.")
+    lines += ['', '- 제공 전사와 AI가 검토한 매핑이 원 저자의 미공개 CSV와 동일한 것은 아니다. 알려진 시간 오류나 불명확한 질문 의미가 모두 해결됐다고 주장하지 않는다.',
+              '- E3/E4는 여러 부모 맥락의 응답을 같은 정규 질문 슬롯으로 합친다. 이 단계는 고정 위치 모델이며 계층 구조의 보존을 검증한 실험이 아니다.',
+              '- 모든 조건에 같은 10개 슬롯을 가리는 증강을 적용했지만, 조건별 관측 슬롯 수가 달라 실제 유효 정보 제거량이 달라질 수 있다. 각 실행의 effective_masking.json을 함께 보관했다.',
+              '- 검증 집합은 32명으로 작고, 여러 조건의 비교와 체크포인트 선택에 함께 사용했다. 최종 후보도 이 결과로 선택한다면 추가적인 선택 편향이 발생할 수 있다.',
+              '- 토크나이저 오류 수정과 전체 입력 보강을 구분한다. 원 논문 성능을 확증하거나 반박한 실험으로 표현하지 않는다.',
+              '- PHQ 선별 라벨 예측이며 임상 진단 성능이나 AI 주석의 임상적 타당성 검증이 아니다.', '',
+              '## 재현 자료', '',
+              '- protocol.json + protocol_amendment_tokenizer.json: 사전 조건과 학습 전 기술 오류 수정.',
+              '- mapping.json/mapping_review.json, events.jsonl, segments_E*.jsonl, input_review_packet.json: 매핑·출처·검토 자료.',
+              '- features/frozen_inputs.json, text_audit.json, assembly_audit.json, input_verification.json: 입력·토큰·배열 검증.',
+              '- runs/frozen_config.json, initial/extend_complete.json, initial/extend_results.json: 15회 및 25회 완료 기록.',
+              '- runs/{condition}_seed{seed}: 100 epochs의 기록, 최저 검증 손실 가중치, 학습·검증 예측, 증강·attention·유효 마스크 통계.',
+              '- verification_initial.json/verification_extend.json: 독립 재계산과 보호 대상인 기존 산출물의 무변경 검사.',
+              '- 실행 명령은 run_initial.sh/run_extend.sh, 실행 설명은 experiments/HIQUE_INPUT_STUDY_V3.md에 있다.']
+    (base/'results_ko.md').write_text('\n'.join(lines)+'\n')
+
+
+if __name__=='__main__':
+    main()

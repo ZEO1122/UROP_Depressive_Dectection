@@ -1,0 +1,82 @@
+"""Report unchanged V3 checkpoints on the predeclared reference test cohort."""
+import csv
+import json
+from pathlib import Path
+
+from .hique_train import digest
+
+
+def main():
+    base=Path('Data/hique_input_study_v3')
+    test=base/'test_evaluation'
+    runs=test/'runs'
+    manifest=json.loads((runs/'evaluation_manifest.json').read_text())
+    if manifest['status']!='complete' or manifest['test_results_sha256']!=digest(runs/'test_results.json'):
+        raise ValueError('Incomplete or changed evaluation')
+    result=json.loads((runs/'test_results.json').read_text())
+    dev=json.loads((base/'runs/extend_results.json').read_text())
+    names={'E0':'ASR 기준선·수정된 토크나이저','E1':'제공 전사·마지막 답변','E2':'제공 전사·첫 답변',
+           'E3':'제공 전사·전체 답변·512토큰','E4':'제공 전사·전체 답변·블록 pooling'}
+    rows=[]
+    for condition in names:
+        summary=result['conditions'][condition]['per_seed_summary']
+        row={'condition':condition,'description':names[condition],
+             'dev_macro_f1_mean':dev['conditions'][condition]['summary']['dev']['macro_f1']['mean']}
+        for key in ['macro_f1','positive_f1','sensitivity','specificity','auroc','weighted_f1']:
+            row[key+'_mean']=summary[key]['mean'];row[key+'_sd']=summary[key]['std']
+        rows.append(row)
+    with (test/'results.csv').open('w',newline='') as f:
+        writer=csv.DictWriter(f,fieldnames=list(rows[0]));writer.writeheader();writer.writerows(rows)
+    lines=['# HiQuE V3 고정 모델 test 평가', '',
+           '**학습 완료된 25개 체크포인트를 변경 없이 평가했다. 새로운 미노출 test라고 주장하지 않는 참고 benchmark 결과다.**', '',
+           '## 평가 범위', '',
+           '- 공식 test 47명 중 411(ASR 질문 입력 부재),480(제공 Ellie 전사 누락)을 제외한 동일한 45명을 다섯 조건에 사용했다. 300은 포함한다. 440은 dev 소속이며 앞선 학습 단계에서 제외했다.',
+           '- E0–E4 × 시드 42/13/23/37/79의 저장 가중치를 그대로 사용했다. 재학습·가중치 선택·threshold 조정·질문 매핑 갱신은 하지 않았다.',
+           '- 학습 당시 최소 dev loss로 선택한 가중치와 수정된 RoBERTa 토크나이저, 모달리티별 결측 처리, 원시 특징 크기, argmax(동률은 class 0)를 그대로 유지했다.',
+           '- E2는 test 이전에 dev 평균 Macro-F1이 가장 높았던 참고 조건이다. Test에서 가장 높은 조건이나 seed를 새로 골라 대표 모델로 바꾸지 않았다.',
+           '- 주 비교 E1−E0, 보조 비교 E2−E1/E3−E1/E4−E3을 평가 전에 고정했다.',
+           '- 정답은 사용자 제공 full_test_split.csv의 이진 PHQ 라벨을 유지했다. 원 배포본과의 외부 인증을 새로 수행한 것은 아니다.', '',
+           '## Test 결과', '',
+           '±는 같은 45명에 대한 5개 시드 지표의 표준편차(ddof=0)이며 참가자 신뢰구간이 아니다. Dev는 32명으로 표본·역할이 다르다.', '',
+           '| 조건 | Dev Macro-F1 평균 | Test Macro-F1 평균 ± SD | Test 양성 F1 | Test AUROC |',
+           '|---|---:|---:|---:|---:|']
+    for r in rows:
+        lines.append(f"| {r['condition']} {r['description']} | {r['dev_macro_f1_mean']:.4f} | {r['macro_f1_mean']:.4f} ± {r['macro_f1_sd']:.4f} | {r['positive_f1_mean']:.4f} | {r['auroc_mean']:.4f} |")
+    lines += ['', '## 사전 지정 비교', '',
+              '| 비교 | 시드별 Test Macro-F1 차이 평균 | 참가자 재표집 95% 구간 |', '|---|---:|---:|']
+    for key,d in result['comparisons'].items():
+        lines.append(f"| {key.replace('_minus_',' − ')} | {d['delta_macro_f1']:+.4f} | [{d['ci95'][0]:+.4f}, {d['ci95'][1]:+.4f}] |")
+    d=result['comparisons']['E1_minus_E0'];lo,hi=d['ci95']
+    if lo<=0<=hi:
+        verdict='주 비교의 구간이 0을 포함하므로 이 평가에서 E1의 E0 대비 우위를 확인했다고 결론 내리지 않는다.'
+    elif lo>0:
+        verdict='이 고정 모델·test 표본에서 주 비교는 E1에 유리했고 재표집 구간도 0보다 컸다. 기존 test 노출이 있는 만큼 새로운 독립 확증 평가로 해석하지 않는다.'
+    else:
+        verdict='이 고정 모델·test 표본에서 주 비교는 E1에 불리했고 재표집 구간도 0보다 작았다. 새로운 독립 확증 평가로 해석하지 않는다.'
+    lines += ['', verdict, '',
+              '같은 참가자를 모든 시드와 두 조건에서 함께 재표집한 2,000회 bootstrap이다. 시드별 F1 차이를 평균하며, 확률을 먼저 평균한 ensemble 비교와 다르다. 고정된 학습 모델에 조건부인 표본 불확실성이며 훈련 데이터·설계 선택의 불확실성을 모두 반영하지 않는다.', '',
+              '## 저장된 대조군', '']
+    for c,v in result['controls'].items():
+        lines.append(f"- {c}: 질문 등장 여부 LR Macro-F1 {v['question_presence']['macro_f1']:.4f}, train 다수 클래스 대조군 {v['majority']['macro_f1']:.4f}.")
+    lines += ['', '위 대조군도 기존 train에서 학습한 계수와 다수 클래스만 사용했다. Test에서 다시 학습하지 않았다.', '',
+              '## 해석 제한', '',
+              '- 이전 V1/V2에서 test 결과와 공개 사례를 이미 확인했다. 따라서 이번 평가도 완전히 새로운 미노출 자료로 부르지 않는다.',
+              '- E1−E0는 전사·화자·구간·질문 매핑을 함께 바꾼 입력 경로의 효과다. 화자 구분만의 인과 효과로 해석하지 않는다.',
+              '- 제공 전사와 AI가 검토한 질문 매핑은 저자의 미공개 중간 CSV와 동일하다고 확인되지 않았다. Unknown 문장에 맞춰 test용 별칭을 추가하지 않았다.',
+              '- E3/E4는 여러 부모 맥락의 응답을 고정 질문 슬롯에 합친다. 원 논문 계층 구현을 검증한 실험은 아니다.',
+              '- 이전 0.553은 잘못된 토크나이저와 다른 cohort/모델 조건의 결과다. 이번 점수와 직접 빼서 단일 수정 효과라고 보고하지 않는다.',
+              '- 논문 0.79와 달리 표본 45명, 전처리·모델 구성·미확정 가정의 차이가 있어 정확 재현 여부를 점수만으로 판단할 수 없다.',
+              '- PHQ 선별 라벨 예측이며 임상 진단 성능은 아니다.', '',
+              '## 산출물과 검증', '',
+              '- test_protocol.json: 평가 전에 고정한 45명·조건·시드·비교·E2 사전 선택 기록.',
+              '- features/frozen_inputs.json, text_audit.json, assembly_audit.json: 전처리·토큰화·동일 입력 검증.',
+              '- runs/frozen_evaluation.json: 학습 완료 기록·원 가중치·test 특징·평가 소스·라벨 파일 해시.',
+              '- runs/evaluation_manifest.json: 실제 정답 파싱 전 기록과 평가 완료 결과 해시.',
+              '- runs/{condition}_seed{seed}/test_predictions.npz: 참가자별 예측과 원 checkpoint 해시.',
+              '- runs/test_results.json: 시드별 모든 지표, 평균·SD, 사전 비교, 대조군. 확률 앙상블 지표는 보조 항목으로 분리.',
+              '- verification.json: 독립 수치 및 기존 산출물 무변경 검사. 원문·특징·참가자별 예측은 Git 제외 경로에 보관한다.']
+    (test/'results_ko.md').write_text('\n'.join(lines)+'\n')
+
+
+if __name__=='__main__':
+    main()

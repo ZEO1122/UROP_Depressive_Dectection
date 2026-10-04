@@ -7,6 +7,7 @@ data/raw/
 data/private/
 data/processed/
 private/
+/Data/
 *_TRANSCRIPT.csv
 *_AUDIO.wav
 *_COVAREP.csv
@@ -28,6 +29,10 @@ full_test_split.csv
 /Week2/merge_verification.json
 
 # Local tools, build artifacts and agent scratch files
+/.omx/
+/.urop-legacy.lock
+/.agents/
+/tmp/
 /.tmp/
 /.chart-data-*/
 /.codex-finalizer/
@@ -47,6 +52,7 @@ dist/
 *.egg-info/
 
 # Secrets and machine-specific configuration
+/.aws/
 .env
 .env.*
 !.env.example

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "purpose": "descriptive_registry_not_runner_configuration",
+  "id": "ai_annotation_pilot",
+  "status": "exploratory_ai_drafts",
+  "cohort": {
+    "train_participants": 20,
+    "qa": 199
+  },
+  "private_artifacts": "Data/experiments/2026-09-27/ai_annotated_a",
+  "results": [
+    "results.md"
+  ],
+  "limitations": [
+    "AI labels are not independent clinical gold",
+    "Participant-level leave-one-out evaluation"
+  ]
+}

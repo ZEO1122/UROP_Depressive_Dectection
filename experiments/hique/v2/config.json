@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "purpose": "descriptive_registry_not_runner_configuration",
+  "id": "hique_v2",
+  "status": "historical_tokenizer_invalid",
+  "cohort": {
+    "train": 107,
+    "dev": 33,
+    "test": 46
+  },
+  "conditions": [
+    "H_AVT",
+    "F_AVT",
+    "H_T"
+  ],
+  "seeds": [
+    13,
+    23,
+    37,
+    42,
+    79
+  ],
+  "epochs": 100,
+  "private_artifacts": "Data/hique_reproduction_excluding440",
+  "results": [
+    "results.md"
+  ],
+  "limitations": [
+    "Incorrect tokenizer loading",
+    "Question-mark speaker heuristic",
+    "Assumed parent position encoding",
+    "Prior test exposure"
+  ]
+}

@@ -1,72 +1,78 @@
-# UROP · 우울증 Assessment 지원 연구
+# UROP · 우울증 평가 지원 연구
 
-임상 지식과 면담 맥락을 활용해 우울 증상의 근거를 식별하고, 평가에 필요한 정보가 무엇인지 탐지하는 LLM 연구를 준비하는 저장소입니다.
+우울증 평가 지원을 위한 문헌 조사와 DAIC-WOZ 멀티모달 실험 저장소입니다. 연구 방향, 실행 코드, 실험 결과와 과거 기록을 역할별로 관리합니다.
 
-현재는 **선행연구 조사와 연구 설계 단계**입니다. 모델 학습·성능 재현·임상 검증은 아직 수행하지 않았습니다.
+## 먼저 볼 문서
 
-## 연구 방향
+- [HiQuE 단일 파이프라인 노트북](experiments/hique/v3_input_study/pipeline.ipynb): 단계별 한국어 설명, 논문·공개 코드 대응, 기존 결과 확인과 새 실행.
+- [연구 방향](docs/research_direction.md)
+- [실험 목록과 상태](experiments/README.md)
+- [현재 V3 실험](experiments/hique/v3_input_study/README.md) · [dev 결과](experiments/hique/v3_input_study/dev_results.md) · [test 결과](experiments/hique/v3_input_study/test_results.md)
+- [데이터 구성·알려진 문제](docs/dataset.md)
+- [실행 방법·과거 기록 검증](docs/reproducibility.md)
+- [문헌 조사](docs/literature/README.md) · [성능 격차 진단](docs/hique_diagnosis.md)
 
-연구 질문은 **“임상 기준과 관측된 면담 맥락이 LLM의 증상 근거 판별 및 정보 부족 탐지를 개선하는가?”**입니다.
+## 현재 상태
 
-- 증상 근거가 있는 발화와 시간·기능 맥락을 연결합니다.
-- 근거의 지지·부인·불충분·상충 상태를 구분합니다.
-- 문헌의 임상 지식, 면담 내 맥락, 실제 제공된 환자 정보를 구분합니다.
-- 관측되지 않은 환자 정보는 추측해서 채우지 않고 추가 확인 사항으로 남깁니다.
+V3는 다섯 조건을 각각 다섯 시드로 학습하고, 저장된 25개 모델을 공통 test 45명에서 평가했습니다. Dev에서 사전에 선택한 **제공 전사·첫 답변(E2)의 test Macro-F1은 0.6541 ± 0.0344**입니다. 주 비교 E1−E0의 95% 재표집 구간은 0을 포함합니다.
 
-DSM 기반 지식은 평가의 기준틀로 활용합니다. PHQ-8 예측을 임상 진단으로 해석하지 않으며, 현재 주제의 신규성과 임상적 타당성은 추가 검토가 필요합니다.
+이 결과는 원 논문의 0.79를 동일 조건에서 재현한 값이 아닙니다. 기존 test 노출과 전처리·계층 구현 차이가 있으며, PHQ 선별 라벨 예측을 임상 진단으로 해석하지 않습니다. V1/V2에는 토크나이저 로딩 오류가 확인돼 과거 기록으로 보존합니다. 자세한 제한은 각 실험 결과에 있습니다.
 
-## 읽기 순서
-
-1. [현재 연구 방향: Assessment·DSM·LLM](Week2/research/week2_literature/assessment_reframing_ko.md)
-2. [선행연구 정리와 초기 주제 검토](Week2/research/week2_literature/literature_review_ko.md)
-3. [선정 문헌 15편과 검토 수준](Week2/research/week2_literature/selected_papers.json)
-4. [문헌 검색 방법과 검증 범위](Week2/research/week2_literature/search_log.md)
-
-초기 문서의 PHQ-8/대화 시간 특징 중심 제안은 Assessment 중심 수정안으로 대체되었습니다. 문헌에서 보고한 성능과 이 프로젝트가 직접 재현한 성능을 구분합니다.
-
-## 폴더 구조
+## 저장소 구조
 
 ```text
-UROP/
-├── README.md
-├── .gitignore
-├── Week1/
-│   └── README.md                 # 우울증·PHQ-8·DAIC-WOZ 이해
-└── Week2/
-    ├── README.md
-    └── research/
-        └── week2_literature/     # 문헌 정리, 연구 방향, 서지 목록
+src/urop/                   현재 공통 코드와 CLI
+  data/                     전사·질문·구간 처리
+  features/                 음성·영상·텍스트 특징
+  models/                   모델·공개 코드 어댑터
+  training/                 학습·증강·dev 보고
+  evaluation/               지표·test 평가·보고
+experiments/                실험별 설명·등록 설정·집계 결과
+  evidence_pilot/           초기 세 탐색 실험
+  ai_annotation_pilot/      AI 잠정 주석 실험
+  hique/v1/, v2/            오류·한계를 포함한 과거 결과
+  hique/v3_input_study/      현재 입력 보강 실험·실행 노트북
+  README.md                 실험 목록
+docs/                       연구 방향·문헌·데이터·주차별 기록
+archive/                    이전 설계와 변경하지 않는 실행 소스
+tests/                      현재 코드의 회귀검사
+requirements/               기존 특징·학습 환경의 직접 의존성 버전
+Data/                       비공개 원본·캐시·가중치·참가자별 결과
+output/                     생성 PDF·발표자료
 ```
 
-로컬에는 `DAIC_WOZ/`, 발표 PPT, `output/`, `.tmp/` 등이 추가로 존재할 수 있습니다. 이들은 GitHub 공유 대상에서 제외됩니다. 일부 조사 기록의 로컬 경로는 자료를 검토했던 당시 위치이며 다른 환경에서 실행할 경로가 아닙니다.
+`Data/`, `.tmp/`, `output/`은 로컬 자료이며 Git에 포함하지 않습니다. 2026-10-04 구조 정리는 새로운 학습이나 test 평가를 수행하지 않았습니다.
 
-## 데이터 및 공유 범위
+## 실행 시작
 
-DAIC-WOZ는 [USC 공식 배포처](https://dcapswoz.ict.usc.edu/)를 통해 해당 이용 조건에 따라 별도로 확보해야 합니다. 데이터셋, 참가자 전사·녹음·특징·라벨과 파생 자료를 이 저장소에 배포하지 않습니다.
-
-현재 발표 자료와 `output/`에는 데이터셋에서 추출한 예시가 포함되어 있어 로컬에 보관합니다. 공개용 자료가 필요하면 참가자 정보와 제3자 자료의 배포 범위를 확인한 별도 버전을 준비합니다.
-
-내려받은 논문 전문과 검색 원본은 제외하고 서지 링크·요약·검색 방법을 공유합니다. API 키, `.env`, 모델 가중치, feature cache, 실행 로그, 가상환경도 `.gitignore`로 제외합니다. 제외 규칙은 파일을 삭제하지 않습니다.
-
-## 문헌조사 도구
-
-[OpenResearch](https://github.com/alphaXiv/OpenResearch) CLI 0.2.1의 alphaXiv/OpenAlex 검색을 사용했습니다. 조사일은 2026-09-14이며, 체계적 문헌고찰이나 전체 분야를 빠짐없이 수집한 목록은 아닙니다. CLI 바이너리는 포함하지 않으며 설치는 공식 문서를 참고합니다.
-
-## 다음 단계
-
-- 증상 근거·기간·기능·정보 부족에 대한 annotation 지침 작성
-- 임상 전문가와 소규모 면담 annotation 검토
-- 동일 LLM에서 임상 지식과 면담 맥락 제공 조건 비교
-- 근거 판별, 정보 부족 탐지, 근거 없는 주장 비율 평가
-
-## GitHub 업로드 전 확인
+기존 라이브러리가 설치된 환경에서 다음 명령으로 진입할 수 있습니다.
 
 ```sh
-git status --short
-git ls-files --others --exclude-standard
-git add --dry-run .
+PYTHONPATH=src python3 -m urop --help
+PYTHONPATH=src .tmp/hique-features/bin/python -m urop features --help
+PYTHONPATH=src .tmp/hique-tf/bin/python -m urop train --help
 ```
 
-목록에 공개하려는 파일만 나타나는지 확인합니다. `.gitignore`는 이미 추적 중인 파일이나 과거 Git 기록을 제거하지 않습니다. 이 로컬 저장소에는 도구용 `refs/codex/` 참조가 있으므로 저장소 전체를 보내는 `git push --mirror` 대신 공개할 브랜치만 push합니다.
+패키지는 기존 두 격리 환경에 의존성 추가 없이 설치했습니다. 새 환경의 설치와 실제 파이프라인 인수는 [재현 안내](docs/reproducibility.md)를 참고하세요. 실험의 `config.json`은 설명용 등록 정보이며 자동 실행 설정으로 읽히는 파일은 아닙니다.
 
-이 저장소에 제3자 데이터·논문의 재배포 권한을 부여하는 라이선스는 포함하지 않았습니다. 각 자료는 원 배포처의 조건을 따릅니다.
+## 과거 실행 감사
+
+과거 소스는 `archive/snapshots/pre-reorg-2026-10-04/`에 바이트 그대로 보존합니다. 과거 절대 경로를 요구하는 검증은 호환 실행기가 소스를 잠시 복원해서 수행합니다.
+
+```sh
+PYTHONPATH=src python3 -m urop legacy verify
+PYTHONPATH=src python3 -m urop legacy run --python .tmp/hique-tf/bin/python experiments.hique3_test -- --help
+```
+
+소스·입력·가중치 hash와 기존 기록은 유지합니다. 과거 frozen JSON을 새 소스 hash로 덮어쓰지 않습니다. [보관 소스 안내](archive/snapshots/pre-reorg-2026-10-04/README.md)를 참고하세요.
+
+## 검증
+
+```sh
+python3 -m pytest -q
+PYTHONPATH=src .tmp/hique-tf/bin/python -m pytest tests/models tests/training tests/evaluation -q
+python3 -m ruff check src tests
+python3 -m mypy src/urop
+```
+
+현재 테스트와 보관된 원본 회귀검사는 분리합니다. 데이터·가중치·환경이 필요한 검사는 해당 로컬 환경에서 실행해야 합니다. 원문 전사·오디오·얼굴 특징·개인별 예측과 자격 증명은 공유 대상에서 제외합니다.

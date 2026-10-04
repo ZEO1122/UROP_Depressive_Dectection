@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "purpose": "descriptive_registry_not_runner_configuration",
+  "id": "evidence_pilot",
+  "status": "exploratory_proxy_labels",
+  "cohort": {
+    "train": 107,
+    "dev": 32
+  },
+  "private_artifacts": "Data/experiments/2026-09-27",
+  "results": [
+    "results.md"
+  ],
+  "limitations": [
+    "No independent human gold",
+    "Keyword coverage is a proxy"
+  ]
+}

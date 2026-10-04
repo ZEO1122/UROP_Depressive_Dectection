@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "purpose": "descriptive_registry_not_runner_configuration",
+  "id": "hique_v1",
+  "status": "historical_tokenizer_invalid",
+  "cohort": {
+    "train": 107,
+    "dev": 32,
+    "test": 45
+  },
+  "conditions": [
+    "A",
+    "V",
+    "T",
+    "AV",
+    "AT",
+    "VT",
+    "AVT"
+  ],
+  "seeds": [
+    13,
+    23,
+    37,
+    42,
+    79
+  ],
+  "epochs": 100,
+  "private_artifacts": "Data/hique_reproduction",
+  "results": [
+    "results.md"
+  ],
+  "limitations": [
+    "Incorrect tokenizer loading",
+    "Hierarchy not implemented",
+    "Prior test exposure"
+  ]
+}
